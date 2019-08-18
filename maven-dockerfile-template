@@ -1,4 +1,4 @@
-FROM wz2cool/maven3-aliyun-jdk8:2
+FROM MAVEN_BUILD_IMAGE
 ADD pom.xml /tmp/build/
 RUN cd /tmp/build && mvn -q dependency:resolve
 
