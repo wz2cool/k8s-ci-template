@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: (SERVICE_NAME)
+spec:
+  replicas: (REPLICAS_COUNT)
+  template:
+    metadata:
+      labels:
+        run: (SERVICE_NAME)
+    spec:
+      containers:
+      - name: (SERVICE_NAME)
+        image: (IMAGE_URL)
+        ports:
+          - containerPort: (SERVICE_PORT)
+        envFrom:
+          - configMapRef:
+              name: public-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: (SERVICE_NAME)
+spec:
+  selector:
+    run: (SERVICE_NAME)
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: (SERVICE_PORT)
+    targetPort: (SERVICE_PORT)
